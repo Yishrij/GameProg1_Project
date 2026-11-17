@@ -1,0 +1,107 @@
+**************** Demo_UI ******************************
+
+
+
+Step 0- Create MainScreen World subclass
+
+
+----- A) For MainScreen world:
+
+Step 1- Create Display as Actor subclas
+
+Step 2- Create Option1_Button as Actor subclass and set its image to Option1_Button.png
+
+Step 3- Create Option2_Button as Actor subclass and set its image to Option2_Button.png
+
+Step 3- Create Option3_Button as Actor subclass and set its image to Option3_Button.png
+
+Step 4- Update act() of the three buttons with related code: Code 1
+
+----- Code 1
+// Option1_Button class - act() method
+// Option2_Button class - act() method
+// Option3_Button class - act() method
+
+    public void act() 
+    {
+        if (Greenfoot.mouseMoved(this))
+        {
+            setImage("Option1_Button_Highlighted.png");
+        }
+
+        if (Greenfoot.mouseMoved(getWorld()))
+        {
+            setImage("Option1_Button.png");
+        }
+
+        if (Greenfoot.mouseClicked(this))
+        {
+
+            Display display = new Display();
+            getWorld().addObject(display , 280, 500);
+            display.setImage(new GreenfootImage("You have selected Option 1 ", 35, Color.WHITE, Color.BLACK, Color.YELLOW));
+
+        }
+    }    
+}
+
+
+Step 5- Instantiate an object for each button: Option1_Button, Option2_Button and Option3_Button in MainScreen world
+
+Step 6- Save the world
+
+
+
+
+----------------------------------------------------------------
+
+----- B) For WelcomeScreen world:
+
+
+Step 7- Define timeWelcomeScreenCreation as property in WelcomeScreen (Add code 2)
+
+------ Code 2
+// Define timeWelcomeScreenCreation as property in WelcomeScreen
+
+   double timeWelcomeScreenCreation = System.currentTimeMillis();
+
+
+
+
+
+----------------------------------------------------------------
+
+Step 8- Update WelcomeScreen class - act() method (Add code 3)
+
+----- Code 3
+// WelcomeScreen class - act() method
+
+    public void act()
+    {
+
+        Display display = new Display();
+        addObject(display , 280, 500);
+        
+        int timerValue = (int) (System.currentTimeMillis() - timeWelcomeScreenCreation)/1000;
+        
+        display.setImage(new GreenfootImage("Timer Value :" + timerValue , 35, Color.WHITE, Color.BLACK, Color.YELLOW));
+        
+
+        if (Greenfoot.isKeyDown("space"))
+        {
+            Greenfoot.setWorld(new MainScreen()); 
+
+        }
+
+        if (System.currentTimeMillis() >= (timeWelcomeScreenCreation + (9 * 1000)))
+        {
+            Greenfoot.setWorld(new MainScreen()); 
+        }
+
+    }
+
+
+----------------------------------------------------------------
+
+
+
